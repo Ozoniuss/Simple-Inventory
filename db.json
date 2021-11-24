@@ -1,18 +1,25 @@
 {
   "items": [
     {
-      "name": "jesus",
-      "price": 0,
-      "type": "nfnfnf",
-      "brand": "nfnfn",
+      "name": "New Car",
+      "price": "50000",
+      "type": "Sports",
+      "brand": "Porsche",
       "id": 1
     },
     {
-      "name": "fwefefaefea",
-      "price": 0,
-      "type": "nfnfnf",
-      "brand": "nfnfn",
+      "name": "Dave Mustaine Wine",
+      "price": "80",
+      "type": "Red Wine",
+      "brand": "Megadeth",
       "id": 2
+    },
+    {
+      "name": "Rust in Peace - Megadeth",
+      "price": "29.99",
+      "type": "Music Record",
+      "brand": "Capitol",
+      "id": 3
     }
   ]
 }

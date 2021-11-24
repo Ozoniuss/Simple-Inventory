@@ -1,18 +1,19 @@
-function ItemsDisplay(props){
+function ItemsDisplay(props) {
 
+    //jsx of a single item in a table
     const showItem = (item) => {
-            return (<tr>
-                <th scope="row">{item.id}</th>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
-                <td>{item.type}</td>
-                <td>{item.brand}</td>
-                <td><button className = "btn btn-danger" onClick={()=>{props.deleteItem(item)}}>Delete</button></td>
-            </tr>
-            )
+        return (<tr key={item.id}>
+            <th scope="row">{item.id}</th>
+            <td>{item.name}</td>
+            <td>{item.price}</td>
+            <td>{item.type}</td>
+            <td>{item.brand}</td>
+            <td><button className="btn btn-danger" onClick={() => { props.deleteItem(item) }}>Delete</button></td>
+        </tr>
+        )
     }
 
-    return(
+    return (
         <div className="container">
             <div className="row">
                 <h2>Items</h2>

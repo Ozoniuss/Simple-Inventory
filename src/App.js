@@ -4,66 +4,73 @@ import SearchBar from './SearchBar';
 import ItemsDisplay from './ItemsDisplay';
 
 
-
-// the component must return a jsx element
 function App() {
   const [filters, setFilters] = useState({ name: "", maxPrice: 0, type: "", brand: "" });
-  const [data, setData] = useState({ items: [] });
-  const [showTest, setShowTest] = useState(true);
+  const [data, setData] = useState({ items: [] }); // probably a list would have worked better
 
   useEffect(() => {
     //default is a get request
     fetch("http://localhost:3000/items")
       .then((response) => response.json())
       .then((data) => { setData({ items: data }) })
+      .catch(error => { console.log(error.toString()) })
   }, []);
 
   const addItemToDtata = (item) => {
     let items = data["items"];
 
+    // set the request options for a post request when adding to the database
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // some json data
-
       },
       body: JSON.stringify(item)
-    }
+    };
 
-    fetch("http://localhost:3000/items", requestOptions).then((response) => response.json())
+    fetch("http://localhost:3000/items", requestOptions)
+      .then((response) => response.json())
       .then((item) => {
         items.push(item)
         setData({ items: items })
       })
+      .catch(error => { console.log(error.toString()) });
 
     resetFilters();
   }
 
   const deleteItem = (item) => {
-    const items = data["items"];
+
+    //set request options for a delete method
     const requestOptions = {
       method: "DELETE"
     };
-    fetch(`http://localhost:3000/items/${item.id}`, requestOptions).then(
-      (response) => {
+
+    //delete the item from the database when pressing the delete button
+    fetch(`http://localhost:3000/items/${item.id}`, requestOptions)
+      .then((response) => {
         if (response.ok) {
-          fetch("http://localhost:3000/items").then((response) => response.json())
+          fetch("http://localhost:3000/items")
+            .then((response) => response.json())
             .then((data) => { setData({ items: data }) })
         }
       })
-
+      .catch(error => { console.log(error.toString()) });
 
   }
 
   const filterData = (data) => {
     const filteredData = [];
 
-    if (filters.name === "" && filters.maxPrice === 0 && filters.type === "" && filters.brand === "") {
+    //no filters
+    if (filters.name === "" &&
+      filters.maxPrice === 0 &&
+      filters.type === "" &&
+      filters.brand === "") {
       return data;
     }
 
-    console.log(data);
-
+    // find the items that satisfy the filters
     for (const item of data) {
       if (filters.name !== "" && item.name !== filters.name) {
         continue;
@@ -89,6 +96,7 @@ function App() {
     setFilters(searchParams);
   }
 
+  // just set the filters to the empty values
   const resetFilters = () => {
     setFilters({ name: "", maxPrice: 0, type: "", brand: "" });
   }

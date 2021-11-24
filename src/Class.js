@@ -1,28 +1,30 @@
+// just an example of a class based component and lifecycle methods
+
 import React from "react";
 
 export default class Test extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {count:0};
+        this.state = { count: 0 };
     }
 
-    clickedButton(){
-        this.setState({count: this.state.count + 1})
+    clickedButton() {
+        this.setState({ count: this.state.count + 1 })
         console.log("clicked!")
-        if (this.state.count == 3){
+        if (this.state.count === 3) {
             this.props.destroy(false);
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         console.log("mounted!")
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log("updated")
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log("cleanup")
     }
 
